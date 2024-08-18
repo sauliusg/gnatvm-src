@@ -404,14 +404,12 @@ static const char ATTR_UNSET = 127;
 
 /* Reset the file attributes as if no system call had been performed */
 
-static struct file_attributes local_attr;
+struct file_attributes unknown_attributes;
 
 void
 __gnat_LOCAL_reset_attributes
   (struct file_attributes* attr)
 {
-  attr = &local_attr;
-    
   attr->exists     = ATTR_UNSET;
 
   attr->writable   = ATTR_UNSET;

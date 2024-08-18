@@ -270,8 +270,9 @@ package Osint is
    --  from the disk and then cached in the File_Attributes parameter (possibly
    --  along with other values).
 
-   type File_Attributes is private;
-   Unknown_Attributes : constant File_Attributes;
+   type File_Attributes is null record;
+   Unknown_Attributes : File_Attributes;
+   pragma Import (C, Unknown_Attributes, "unknown_attributes");   
    --  A cache for various attributes for a file (length, accessibility,...)
    --  This must be initialized to Unknown_Attributes prior to the first call.
 
@@ -766,13 +767,20 @@ private
    --  space (e.g. when a component of this type appears in a record, if it is
    --  unnecessarily large).
 
-   type File_Attributes is
-     array (1 .. File_Attributes_Size)
-       of System.Storage_Elements.Storage_Element;
-   for File_Attributes'Alignment use Standard'Maximum_Alignment;
+   --  type File_Attributes is
+   --  array (1 .. File_Attributes_Size)
+   --  of System.Storage_Elements.Storage_Element;
 
-   Unknown_Attributes : constant File_Attributes := (others => 0);
-   --  Will be initialized properly at elaboration (for efficiency later on,
-   --  avoid function calls every time we want to reset the attributes).
+   --  type File_Attributes is null record;
+
+   type File_Attributes_Pointer is access File_Attributes;
+
+   --  for File_Attributes'Alignment use Standard'Maximum_Alignment;
+
+   --  Unknown_Attributes : File_Attributes; -- := (others => 0);
+
+   --  Will be initialized properly {-at elaboration-} at the C side
+   --  (for efficiency later on, avoid function calls every time we
+   --  want to reset the attributes).
 
 end Osint;
