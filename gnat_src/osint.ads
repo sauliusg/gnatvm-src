@@ -278,10 +278,7 @@ package Osint is
    --  space (e.g. when a component of this type appears in a record, if it is
    --  unnecessarily large).
 
-   type File_Attributes is record
-      Exists : Boolean;
-      Writable : Boolean;
-   end record;
+   type File_Attributes is null record;
    for File_Attributes'Alignment use Standard'Maximum_Alignment;
    for File_Attributes'Size use File_Attributes_Size;
    --  A cache for various attributes for a file (length, accessibility,...)
