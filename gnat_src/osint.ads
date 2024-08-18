@@ -270,11 +270,33 @@ package Osint is
    --  from the disk and then cached in the File_Attributes parameter (possibly
    --  along with other values).
 
-   type File_Attributes is null record;
-   Unknown_Attributes : File_Attributes;
-   pragma Import (C, Unknown_Attributes, "unknown_attributes");   
+   File_Attributes_Size : constant Natural := 32;
+   --  This should be big enough to fit a "struct file_attributes" on any
+   --  system. It doesn't cause any malfunction if it is too big (which avoids
+   --  the need for either mapping the struct exactly or importing the sizeof
+   --  from C, which would result in dynamic code). However, it does waste
+   --  space (e.g. when a component of this type appears in a record, if it is
+   --  unnecessarily large).
+
+   type File_Attributes is record
+      Exists : Boolean;
+      Writable : Boolean;
+   end record;
+   for File_Attributes'Alignment use Standard'Maximum_Alignment;
+   for File_Attributes'Size use File_Attributes_Size;
    --  A cache for various attributes for a file (length, accessibility,...)
    --  This must be initialized to Unknown_Attributes prior to the first call.
+
+   type File_Attributes_Pointer is access File_Attributes;
+
+   Unknown_C_File_Attributes : constant File_Attributes;
+   pragma Import (C, Unknown_C_File_Attributes, "unknown_attributes");
+
+   Unknown_Attributes : constant File_Attributes := Unknown_C_File_Attributes;
+
+   --  Will be initialized properly {-at elaboration-} at the C side
+   --  (for efficiency later on, avoid function calls every time we
+   --  want to reset the attributes).
 
    function Is_Directory
      (Name : C_File_Name;
@@ -759,28 +781,8 @@ private
    --  detected, the file being written is deleted, and a fatal error is
    --  signalled.
 
-   File_Attributes_Size : constant Natural := 32;
-   --  This should be big enough to fit a "struct file_attributes" on any
-   --  system. It doesn't cause any malfunction if it is too big (which avoids
-   --  the need for either mapping the struct exactly or importing the sizeof
-   --  from C, which would result in dynamic code). However, it does waste
-   --  space (e.g. when a component of this type appears in a record, if it is
-   --  unnecessarily large).
-
    --  type File_Attributes is
    --  array (1 .. File_Attributes_Size)
    --  of System.Storage_Elements.Storage_Element;
-
-   --  type File_Attributes is null record;
-
-   type File_Attributes_Pointer is access File_Attributes;
-
-   --  for File_Attributes'Alignment use Standard'Maximum_Alignment;
-
-   --  Unknown_Attributes : File_Attributes; -- := (others => 0);
-
-   --  Will be initialized properly {-at elaboration-} at the C side
-   --  (for efficiency later on, avoid function calls every time we
-   --  want to reset the attributes).
 
 end Osint;
