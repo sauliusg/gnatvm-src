@@ -285,7 +285,6 @@ package Osint is
    type File_Attributes_Pointer is access File_Attributes;
 
    Unknown_Attributes : constant File_Attributes;
-   pragma Import (C, Unknown_Attributes, "unknown_attributes");
 
    --  Will be initialized properly {-at elaboration-} at the C side
    --  (for efficiency later on, avoid function calls every time we
@@ -782,7 +781,10 @@ private
    for File_Attributes'Alignment use Standard'Maximum_Alignment;
    for File_Attributes'Size use File_Attributes_Size;
 
-   Another_Unknown_Attributes : constant File_Attributes :=
-     Unknown_Attributes;
+   Another_Unknown_Attributes : constant File_Attributes;
+   pragma Import (C, Another_Unknown_Attributes, "unknown_attributes");
+
+   Unknown_Attributes : constant File_Attributes :=
+     Another_Unknown_Attributes;
 
 end Osint;
