@@ -780,7 +780,22 @@ private
    --  array (1 .. File_Attributes_Size)
    --  of System.Storage_Elements.Storage_Element;
 
-   type File_Attributes is null record;
+   type File_Attributes is record
+      Exists : Boolean;        -- unsigned char exists;
+
+      Is_Writeble : Boolean;   -- unsigned char writable;
+      Is_Readable : Boolean;   -- unsigned char readable;
+      Is_Executable : Boolean; -- unsigned char executable;
+
+      Is_Symlink : Boolean;    -- unsigned char symbolic_link;
+      Is_Regular : Boolean;    -- unsigned char regular;
+      Is_Directory : Boolean;  -- unsigned char directory;
+
+      Timestamp : Long_Integer; -- OS_Time timestamp;
+      Length : Long_Integer;    -- long file_length;
+
+   end record;
+
    for File_Attributes'Alignment use Standard'Maximum_Alignment;
    for File_Attributes'Size use File_Attributes_Size;
 
