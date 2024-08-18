@@ -12,8 +12,8 @@ endif
 CC=gcc
 GNATMAKE=gnatmake
 CFLAGS=-g -O2
-ADAFLAGS=-gnatpg -gnata -gnatyI
-LIBFLAGS=-gnatpg -gnatyI
+ADAFLAGS=-gnatpg -gnata
+LIBFLAGS=-gnatpg
 MARGS=-m -j0
 LARGS=-largs jmissing.o jtargext.o
 
