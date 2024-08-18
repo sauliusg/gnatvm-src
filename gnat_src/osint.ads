@@ -799,7 +799,11 @@ private
 
    for File_Attributes'Alignment use Standard'Maximum_Alignment;
 
-   Unknown_Attributes : constant File_Attributes := Unknown_C_Attributes;
+   Default_Unknown_Attributes : constant File_Attributes :=
+     (Timestamp => 0, Length => 0, others => 0);
+
+   --  Unknown_Attributes : constant File_Attributes := Unknown_C_Attributes;
+   Unknown_Attributes : constant File_Attributes := Default_Unknown_Attributes;
 
    File_Attributes_Size : constant Natural := File_Attributes'Size;
 
