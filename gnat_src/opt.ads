@@ -1918,7 +1918,7 @@ package Opt is
    --  Note: for many purposes, it is more appropriate to test the flag
    --  Full_Expander_Active, which also checks that SPARK mode is not active.
 
-   Opt.Static_Dispatch_Tables : Boolean := True;
+   Static_Dispatch_Tables : Boolean := True;
    --  This flag indicates if the backend supports generation of statically
    --  allocated dispatch tables. If it is True, then the front end will
    --  generate static aggregates for dispatch tables that contain forward
