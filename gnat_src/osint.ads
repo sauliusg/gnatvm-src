@@ -801,6 +801,6 @@ private
 
    Unknown_Attributes : constant File_Attributes := Unknown_C_Attributes;
 
-   Some_Attributes : File_Attributes;
+   --  Some_Attributes : File_Attributes;
 
 end Osint;
