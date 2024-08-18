@@ -782,4 +782,7 @@ private
    for File_Attributes'Alignment use Standard'Maximum_Alignment;
    for File_Attributes'Size use File_Attributes_Size;
 
+   Another_Unknown_Attributes : constant File_Attributes :=
+     Unknown_Attributes;
+
 end Osint;
