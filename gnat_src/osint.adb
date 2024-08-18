@@ -3299,7 +3299,7 @@ package body Osint is
 ----------------------------
 
    procedure Reset_File_Attributes (Attr : System.Address);
-   pragma Import (C, Reset_File_Attributes, "__gnat_reset_attributes");
+   pragma Import (C, Reset_File_Attributes, "__gnat_LOCAL_reset_attributes");
 
 begin
    Initialization : declare
