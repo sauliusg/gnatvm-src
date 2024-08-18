@@ -15,7 +15,7 @@ CFLAGS=-g -O2
 ADAFLAGS=-gnatpg -gnata -gnatws
 LIBFLAGS=-gnatpg -gnatws
 MARGS=-m -j0
-LARGS=-largs jmissing.o jtargext.o
+LARGS=-largs jmissing.o jtargext.o -bargs -Es
 
 MKDIR=mkdir -p
 RMDIR=rm -rf
