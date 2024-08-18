@@ -781,6 +781,7 @@ private
    --  of System.Storage_Elements.Storage_Element;
 
    type File_Attributes is record
+
       Exists : Boolean;        -- unsigned char exists;
 
       Is_Writeble : Boolean;   -- unsigned char writable;
@@ -797,6 +798,24 @@ private
    end record;
 
    for File_Attributes'Alignment use Standard'Maximum_Alignment;
+
+   for File_Attributes use record
+
+      Exists        at 0 range 0 .. 7;
+      Is_Writeble   at 1 range 0 .. 7;
+      Is_Readable   at 2 range 0 .. 7;
+      Is_Executable at 3 range 0 .. 7;
+
+      Is_Symlink    at 4 range 0 .. 7;
+      Is_Regular    at 5 range 0 .. 7;
+      Is_Directory  at 6 range 0 .. 7;
+
+      --  one byte (at 7) is skipped for alignment
+
+      Timestamp     at  8 range 0 .. 63;
+      Length        at 16 range 0 .. 63;
+
+   end record;
 
    Unknown_Attributes : constant File_Attributes := Unknown_C_Attributes;
 

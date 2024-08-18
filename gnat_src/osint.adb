@@ -36,6 +36,8 @@ with Targparm; use Targparm;
 
 with Unchecked_Conversion;
 
+with Ada.Text_IO;
+
 pragma Warnings (Off);
 --  This package is used also by gnatcoll
 with System.Case_Util; use System.Case_Util;
@@ -3321,7 +3323,14 @@ begin
                      "__gnat_size_of_file_attributes");
 
    begin
-      pragma Assert (Sizeof_File_Attributes <= File_Attributes_Size);
+
+      Ada.Text_IO.Put_Line ("Sizeof_File_Attributes = " &
+                              Integer'Image (Sizeof_File_Attributes * 8));
+
+      Ada.Text_IO.Put_Line ("File_Attributes_Size   = " &
+                              File_Attributes_Size'Image);
+
+      pragma Assert (Sizeof_File_Attributes * 8 = File_Attributes_Size);
 
       Reset_File_Attributes (Unknown_Attributes'Address);
 
