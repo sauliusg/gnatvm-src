@@ -3487,7 +3487,8 @@ package body Prj.Nmsc is
 
                declare
                   Kind_Name : constant String :=
-                    GNAT.Case_Util.To_Lower (Name_Buffer (1 .. Name_Len));
+                    Ada.Characters.Handling.To_Lower
+                        (Name_Buffer (1 .. Name_Len));
 
                   OK : Boolean := True;
 
@@ -4812,8 +4813,8 @@ package body Prj.Nmsc is
          if not Lib_Symbol_Policy.Default then
             declare
                Value : constant String :=
-                 GNAT.Case_Util.To_Lower
-                 (Get_Name_String (Lib_Symbol_Policy.Value));
+                 Ada.Characters.Handling.To_Lower
+                     (Get_Name_String (Lib_Symbol_Policy.Value));
 
             begin
                --  Symbol policy must have one of a limited number of values
