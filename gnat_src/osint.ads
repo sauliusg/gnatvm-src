@@ -782,15 +782,15 @@ private
 
    type File_Attributes is record
 
-      Exists : Boolean;        -- unsigned char exists;
+      Exists : Short_Short_Integer;        -- unsigned char exists;
 
-      Is_Writeble : Boolean;   -- unsigned char writable;
-      Is_Readable : Boolean;   -- unsigned char readable;
-      Is_Executable : Boolean; -- unsigned char executable;
+      Is_Writeble : Short_Short_Integer;   -- unsigned char writable;
+      Is_Readable : Short_Short_Integer;   -- unsigned char readable;
+      Is_Executable : Short_Short_Integer; -- unsigned char executable;
 
-      Is_Symlink : Boolean;    -- unsigned char symbolic_link;
-      Is_Regular : Boolean;    -- unsigned char regular;
-      Is_Directory : Boolean;  -- unsigned char directory;
+      Is_Symlink : Short_Short_Integer;    -- unsigned char symbolic_link;
+      Is_Regular : Short_Short_Integer;    -- unsigned char regular;
+      Is_Directory : Short_Short_Integer;  -- unsigned char directory;
 
       Timestamp : Long_Integer; -- OS_Time timestamp;
       Length : Long_Integer;    -- long file_length;

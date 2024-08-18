@@ -1,3 +1,4 @@
+pragma Ada_2022;
 ------------------------------------------------------------------------------
 --                                                                          --
 --                         GNAT COMPILER COMPONENTS                         --
@@ -3332,7 +3333,11 @@ begin
 
       pragma Assert (Sizeof_File_Attributes * 8 = File_Attributes_Size);
 
+      Ada.Text_IO.Put_Line (">>> Before reset: " & Unknown_Attributes.Exists'Image);
+
       Reset_File_Attributes (Unknown_Attributes'Address);
+
+      Ada.Text_IO.Put_Line (">>> After reset: " & Unknown_Attributes.Exists'Image);
 
       Identifier_Character_Set := Get_Default_Identifier_Character_Set;
       Maximum_File_Name_Length := Get_Maximum_File_Name_Length;
