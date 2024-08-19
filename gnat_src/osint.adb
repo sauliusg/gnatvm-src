@@ -249,7 +249,7 @@ package body Osint is
    end record;
 
    No_File_Info_Cache : constant File_Info_Cache :=
-                          (No_File, Unknown_Attributes);
+                          (No_File, Unknown_Attribute_Value);
 
    package File_Name_Hash_Table is new GNAT.HTable.Simple_HTable (
      Header_Num => File_Hash_Num,
@@ -3296,6 +3296,11 @@ package body Osint is
       end if;
    end Write_With_Check;
 
+   function Unknown_Attributes return File_Attributes is
+   begin
+      return Unknown_Attribute_Value;
+   end Unknown_Attributes;
+
 ----------------------------
 -- Package Initialization --
 ----------------------------
@@ -3347,7 +3352,13 @@ begin
       Ada.Text_IO.Put_Line (">>> Before reset: " &
                               Unknown_Attributes.Exists'Image);
 
-      Reset_File_Attributes (Unknown_Attributes'Address);
+      declare
+         Attr : File_Attributes;
+      begin
+         Reset_File_Attributes (Unknown_Attribute_Value'Address);
+         --  Reset_File_Attributes (Attr'Address);
+         --  Unknown_Attribute_Value := Attr;
+      end;
 
       Ada.Text_IO.Put_Line (">>> After reset: " &
                               Unknown_Attributes.Exists'Image);
