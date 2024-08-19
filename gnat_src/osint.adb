@@ -3306,7 +3306,7 @@ package body Osint is
 ----------------------------
 
    procedure Reset_File_Attributes (Attr : System.Address);
-   pragma Import (C, Reset_File_Attributes, "__gnatvm_gnat_reset_attributes");
+   pragma Import (C, Reset_File_Attributes, "__gnat_reset_attributes");
 
 begin
    Initialization : declare
@@ -3341,7 +3341,7 @@ begin
          function Address_To_Integer is new
            Unchecked_Conversion (Address, Unsigned_Integer);
 
-         A : System.Address := Unknown_Attributes'Address;
+         A : System.Address := Unknown_Attribute_Value'Address;
          U : Unsigned_Integer := Address_To_Integer (A);
       begin
          Ada.Text_IO.Put_Line ("Unknown_Attributes'Address = " & U'Image);
@@ -3350,12 +3350,14 @@ begin
       pragma Assert (Sizeof_File_Attributes <= File_Attributes_Size);
 
       Ada.Text_IO.Put_Line (">>> Before reset: " &
-                              Unknown_Attributes.Exists'Image);
+                              File_Length (Name_Buffer'Address,
+                                           Unknown_Attribute_Value'Access)'Image);
 
       Reset_File_Attributes (Unknown_Attribute_Value'Address);
 
       Ada.Text_IO.Put_Line (">>> After reset: " &
-                              Unknown_Attributes.Exists'Image);
+                              File_Length (Name_Buffer'Address,
+                                           Unknown_Attribute_Value'Access)'Image);
 
       Identifier_Character_Set := Get_Default_Identifier_Character_Set;
       Maximum_File_Name_Length := Get_Maximum_File_Name_Length;

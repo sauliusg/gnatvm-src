@@ -782,31 +782,11 @@ private
    --  array (1 .. File_Attributes_Size)
    --  of System.Storage_Elements.Storage_Element;
 
-   type File_Attributes is record
-
-      Exists : Short_Short_Integer;        -- unsigned char exists;
-
-      Is_Writeble : Short_Short_Integer;   -- unsigned char writable;
-      Is_Readable : Short_Short_Integer;   -- unsigned char readable;
-      Is_Executable : Short_Short_Integer; -- unsigned char executable;
-
-      Is_Symlink : Short_Short_Integer;    -- unsigned char symbolic_link;
-      Is_Regular : Short_Short_Integer;    -- unsigned char regular;
-      Is_Directory : Short_Short_Integer;  -- unsigned char directory;
-
-      Timestamp : Long_Integer; -- OS_Time timestamp;
-      Length : Long_Integer;    -- long file_length;
-
-   end record;
+   type File_Attributes is null record;
 
    for File_Attributes'Alignment use Standard'Maximum_Alignment;
    for File_Attributes'Size use File_Attributes_Size * 8;
 
-   Default_Unknown_Attributes : constant File_Attributes :=
-     (Timestamp => 0, Length => 0, others => 0);
-
-   --  Unknown_Attributes : constant File_Attributes := Unknown_C_Attributes;
-   Unknown_Attribute_Value : File_Attributes :=
-      Default_Unknown_Attributes;
+   Unknown_Attribute_Value : aliased File_Attributes;
 
 end Osint;
