@@ -3352,13 +3352,7 @@ begin
       Ada.Text_IO.Put_Line (">>> Before reset: " &
                               Unknown_Attributes.Exists'Image);
 
-      declare
-         Attr : File_Attributes;
-      begin
-         Reset_File_Attributes (Unknown_Attribute_Value'Address);
-         --  Reset_File_Attributes (Attr'Address);
-         --  Unknown_Attribute_Value := Attr;
-      end;
+      Reset_File_Attributes (Unknown_Attribute_Value'Address);
 
       Ada.Text_IO.Put_Line (">>> After reset: " &
                               Unknown_Attributes.Exists'Image);
