@@ -15,7 +15,7 @@ CFLAGS=-g -O2
 ADAFLAGS=-gnatpg -gnata -gnatws
 LIBFLAGS=-gnatpg -gnatws
 MARGS=-m -j0
-LARGS=-largs jmissing.o jtargext.o adaint.o -L${HOME}/src/binutils-gdb/libiberty -liberty -bargs -Es
+LARGS=-largs jmissing.o jtargext.o jvm-adaint.o -L${HOME}/src/binutils-gdb/libiberty -liberty -bargs -Es
 
 MKDIR=mkdir -p
 RMDIR=rm -rf
@@ -82,7 +82,7 @@ TOOLS1=gnatmake gnatbind gnatlink \
   gnatchop gnatkr gnatls gnatprep gnatxref gnatfind gnatname gnatclean
 TOOLS=$(TOOLS1) gnatcmd gcc $(EXTRA_TOOLS)
 
-C_OBJS=jmissing.o jtargext.o adaint.o
+C_OBJS=jmissing.o jtargext.o jvm-adaint.o
 
 gnatcompile: bldtools cfiles
 	cd $(obj); $(HOST_MAKE) gnat1drv -o $(bin)/$(GNATCOMPILE)
@@ -98,8 +98,8 @@ $(lib)/adainclude/a-except.adb: $(GNAT_SRC)/a-except.adb $(gnatlib)/a-except.adb
 jmissing.o: $(src)/jmissing.c
 	$(CC) -c $(CFLAGS) $< -o $(obj)/$@
 
-adaint.o: $(GNAT_SRC)/adaint.c
-	$(CXX) -c -Igcc-includes $(CFLAGS) $< -o $(obj)/$@
+jvm-adaint.o: $(src)/jvm-adaint.c
+	$(CC) -c -I$(src) -I$(src)/gnat_src $(CFLAGS) $< -o $(obj)/$@
 
 jtargext.o: $(src)/jtargext.c
 	$(CC) -c -D$(DEF_TARGET) $(CFLAGS) $< -o $(obj)/$@

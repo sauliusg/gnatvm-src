@@ -287,7 +287,7 @@ package Osint is
    Unknown_Attributes : constant File_Attributes;
 
    Unknown_C_Attributes : constant File_Attributes;
-   pragma Import (C, Unknown_C_Attributes, "unknown_attributes");
+   pragma Import (C, Unknown_C_Attributes, "GNATVM_unknown_attributes");
 
    --  Will be initialized properly {-at elaboration-} at the C side
    --  (for efficiency later on, avoid function calls every time we
