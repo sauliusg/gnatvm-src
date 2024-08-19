@@ -798,6 +798,9 @@ private
    end record;
 
    for File_Attributes'Alignment use Standard'Maximum_Alignment;
+   --  Structure size is in bits; add some extra padding for new
+   --  compilers:
+   for File_Attributes'Size use 256;
 
    Default_Unknown_Attributes : constant File_Attributes :=
      (Timestamp => 0, Length => 0, others => 0);
