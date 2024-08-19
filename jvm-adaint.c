@@ -9,23 +9,23 @@
 /* uses: */
 #include <adaint.h>
 
-static const char ATTR_UNSET = 127;
+static const char GNATVM_ATTR_UNSET = 127;
 
-struct GNATVM_file_attributes GNATVM_unknown_attributes;
+struct gnatvm_file_attributes gnatvm_unknown_attributes;
 
 void
-__gnat_GNATVM_reset_attributes
-  (struct GNATVM_file_attributes* attr)
+__gnatvm_gnat_reset_attributes
+  (struct gnatvm_file_attributes* attr)
 {
-  attr->exists     = ATTR_UNSET;
+  attr->exists     = GNATVM_ATTR_UNSET;
 
-  attr->writable   = ATTR_UNSET;
-  attr->readable   = ATTR_UNSET;
-  attr->executable = ATTR_UNSET;
+  attr->writable   = GNATVM_ATTR_UNSET;
+  attr->readable   = GNATVM_ATTR_UNSET;
+  attr->executable = GNATVM_ATTR_UNSET;
 
-  attr->regular    = ATTR_UNSET;
-  attr->symbolic_link = ATTR_UNSET;
-  attr->directory = ATTR_UNSET;
+  attr->regular    = GNATVM_ATTR_UNSET;
+  attr->symbolic_link = GNATVM_ATTR_UNSET;
+  attr->directory = GNATVM_ATTR_UNSET;
 
   attr->timestamp = (OS_Time)-2;
   attr->file_length = -1;

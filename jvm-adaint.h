@@ -26,7 +26,7 @@ typedef long GNATVM_OS_Time;
    from the segfaults (MEMORY_ERROR) in the original implementation.
 */
 
-struct GNATVM_file_attributes {
+struct gnatvm_file_attributes {
   unsigned char exists;
 
   unsigned char writable;
