@@ -270,7 +270,7 @@ package Osint is
    --  from the disk and then cached in the File_Attributes parameter (possibly
    --  along with other values).
 
-   File_Attributes_Size : constant Natural;
+   File_Attributes_Size : constant Natural := 32;
    --  This should be big enough to fit a "struct file_attributes" on any
    --  system. It doesn't cause any malfunction if it is too big (which avoids
    --  the need for either mapping the struct exactly or importing the sizeof
@@ -800,9 +800,7 @@ private
    end record;
 
    for File_Attributes'Alignment use Standard'Maximum_Alignment;
-   --  Structure size is in bits; add some extra padding for new
-   --  compilers:
-   for File_Attributes'Size use 256;
+   for File_Attributes'Size use File_Attributes_Size * 8;
 
    Default_Unknown_Attributes : constant File_Attributes :=
      (Timestamp => 0, Length => 0, others => 0);
@@ -810,7 +808,5 @@ private
    --  Unknown_Attributes : constant File_Attributes := Unknown_C_Attributes;
    Unknown_Attribute_Value : File_Attributes :=
       Default_Unknown_Attributes;
-
-   File_Attributes_Size : constant Natural := File_Attributes'Size;
 
 end Osint;

@@ -3330,7 +3330,7 @@ begin
    begin
 
       Ada.Text_IO.Put_Line ("Sizeof_File_Attributes = " &
-                              Integer'Image (Sizeof_File_Attributes * 8));
+                              Integer'Image (Sizeof_File_Attributes));
 
       Ada.Text_IO.Put_Line ("File_Attributes_Size   = " &
                               File_Attributes_Size'Image);
@@ -3347,7 +3347,7 @@ begin
          Ada.Text_IO.Put_Line ("Unknown_Attributes'Address = " & U'Image);
       end;
 
-      pragma Assert (Sizeof_File_Attributes * 8 <= File_Attributes_Size);
+      pragma Assert (Sizeof_File_Attributes <= File_Attributes_Size);
 
       Ada.Text_IO.Put_Line (">>> Before reset: " &
                               Unknown_Attributes.Exists'Image);
