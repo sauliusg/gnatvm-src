@@ -5,3 +5,5 @@
 /cil/bin/
 /cil/lib/
 /cil/obj/
+*.ali
+*.class
