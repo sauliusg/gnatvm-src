@@ -36,8 +36,6 @@ with Targparm; use Targparm;
 
 with Unchecked_Conversion;
 
-with Ada.Text_IO;
-
 pragma Warnings (Off);
 --  This package is used also by gnatcoll
 with System.Case_Util; use System.Case_Util;
@@ -3335,35 +3333,9 @@ begin
 
    begin
 
-      Ada.Text_IO.Put_Line ("Sizeof_File_Attributes = " &
-                              Integer'Image (Sizeof_File_Attributes));
-
-      Ada.Text_IO.Put_Line ("File_Attributes_Size   = " &
-                              File_Attributes_Size'Image);
-
-      declare
-         type Unsigned_Integer is mod 2**32;
-
-         function Address_To_Integer is new
-           Unchecked_Conversion (Address, Unsigned_Integer);
-
-         A : System.Address := Unknown_Attribute_Value'Address;
-         U : Unsigned_Integer := Address_To_Integer (A);
-      begin
-         Ada.Text_IO.Put_Line ("Unknown_Attributes'Address = " & U'Image);
-      end;
-
       pragma Assert (Sizeof_File_Attributes <= File_Attributes_Size);
 
-      Ada.Text_IO.Put_Line (">>> Before reset: " &
-                              File_Length (Name_Buffer'Address,
-                                           Unknown_Attribute_Value'Access)'Image);
-
       Reset_File_Attributes (Unknown_Attribute_Value'Address);
-
-      Ada.Text_IO.Put_Line (">>> After reset: " &
-                              File_Length (Name_Buffer'Address,
-                                           Unknown_Attribute_Value'Access)'Image);
 
       Identifier_Character_Set := Get_Default_Identifier_Character_Set;
       Maximum_File_Name_Length := Get_Maximum_File_Name_Length;
