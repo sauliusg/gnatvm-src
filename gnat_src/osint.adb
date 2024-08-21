@@ -1742,10 +1742,13 @@ package body Osint is
    function Is_Readable_File
      (Name : C_File_Name; Attr : access File_Attributes) return Boolean
    is
-      function Internal (N : C_File_Name; A : System.Address) return Integer;
-      pragma Import (C, Internal, "__gnat_is_readable_file_attr");
+      --  function Internal (N : C_File_Name; A : System.Address) return Integer;
+      --  pragma Import (C, Internal, "__gnat_is_readable_file_attr");
+      function Internal (N : C_File_Name) return Integer;
+      pragma Import (C, Internal, "__gnat_is_readable_file");
    begin
-      return Internal (Name, Attr.all'Address) /= 0;
+      --  return Internal (Name, Attr.all'Address) /= 0;
+      return Internal (Name) /= 0;
    end Is_Readable_File;
 
    ---------------------
@@ -1755,10 +1758,13 @@ package body Osint is
    function Is_Regular_File
      (Name : C_File_Name; Attr : access File_Attributes) return Boolean
    is
-      function Internal (N : C_File_Name; A : System.Address) return Integer;
-      pragma Import (C, Internal, "__gnat_is_regular_file_attr");
+      --  function Internal (N : C_File_Name; A : System.Address) return Integer;
+      --  pragma Import (C, Internal, "__gnat_is_regular_file_attr");
+      function Internal (N : C_File_Name) return Integer;
+      pragma Import (C, Internal, "__gnat_is_regular_file");
    begin
-      return Internal (Name, Attr.all'Address) /= 0;
+      --  return Internal (Name, Attr.all'Address) /= 0;
+      return Internal (Name) /= 0;
    end Is_Regular_File;
 
    ----------------------
