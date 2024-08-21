@@ -11,7 +11,8 @@ endif
 
 CC=gcc
 GNATMAKE=gnatmake
-CFLAGS=-g -O2
+## CFLAGS=-g -O2
+CFLAGS=-g -Og
 ADAFLAGS=-gnatpg -gnata -gnatws
 LIBFLAGS=-gnatpg -gnatws
 MARGS=-m -j0
