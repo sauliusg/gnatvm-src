@@ -1073,13 +1073,16 @@ package body Osint is
      (Name : C_File_Name;
       Attr : access File_Attributes) return Long_Integer
    is
-      function Internal
-        (F : Integer;
-         N : C_File_Name;
-         A : System.Address) return Long_Integer;
-      pragma Import (C, Internal, "__gnat_file_length_attr");
+      --  function Internal
+      --    (F : Integer;
+      --     N : C_File_Name;
+      --     A : System.Address) return Long_Integer;
+      --  pragma Import (C, Internal, "__gnat_file_length_attr");
+      function Internal (N : C_File_Name) return Long_Integer;
+      pragma Import (C, Internal, "__gnat_file_length");
    begin
-      return Internal (-1, Name, Attr.all'Address);
+      --  return Internal (-1, Name, Attr.all'Address);
+      return Internal (Name);
    end File_Length;
 
    ---------------------
