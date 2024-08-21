@@ -274,8 +274,6 @@ package Osint is
    --  A cache for various attributes for a file (length, accessibility,...)
    --  This must be initialized to Unknown_Attributes prior to the first call.
 
-   type File_Attributes_Pointer is access File_Attributes;
-
    --  Unknown_Attributes : constant File_Attributes;
    function Unknown_Attributes return File_Attributes;
    pragma Inline (Unknown_Attributes);
