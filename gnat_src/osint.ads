@@ -288,13 +288,6 @@ package Osint is
    function Unknown_Attributes return File_Attributes;
    pragma Inline (Unknown_Attributes);
 
-   Unknown_C_Attributes : constant File_Attributes;
-   pragma Import (C, Unknown_C_Attributes, "gnatvm_unknown_attributes");
-
-   --  Will be initialized properly {-at elaboration-} at the C side
-   --  (for efficiency later on, avoid function calls every time we
-   --  want to reset the attributes).
-
    function Is_Directory
      (Name : C_File_Name;
       Attr : access File_Attributes) return Boolean;
@@ -788,5 +781,9 @@ private
    for File_Attributes'Size use File_Attributes_Size * 8;
 
    Unknown_Attribute_Value : aliased File_Attributes;
+
+   --  Will be initialized properly {-at elaboration-} at the C side
+   --  (for efficiency later on, avoid function calls every time we
+   --  want to reset the attributes).
 
 end Osint;
